@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubham Verma - Professional Phlebotomy Technician Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Variables for easy color theme management */
+        :root {
+            --primary-dark-blue: #0A192F; /* Deep blue, main background */
+            --secondary-blue: #112240; /* Slightly lighter blue for sections */
+            --accent-green: #64FFDA; /* Bright accent color (mint green/teal) */
+            --light-text: #E6F1FF; /* Light text color */
+            --dark-text: #000000; /* Dark text for contrast */
+            --subtle-gray: #CCD6F6; /* Lighter shade for some text/borders */
+        }
+
+        /* General Body Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            background-color: var(--primary-dark-blue);
+            color: var(--light-text);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Header (Navigation Bar) */
+        header {
+            background: rgba(10, 25, 47, 0.9); /* Semi-transparent for glass morphism effect */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            padding: 0.8rem 0;
+            background: rgba(10, 25, 47, 0.98); /* Less transparent when scrolled */
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent-green), var(--subtle-gray));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        header.scrolled .logo {
+            font-size: 2rem;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .desktop-nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .desktop-nav ul li a::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+
+        .desktop-nav ul li a:hover::before {
+            width: 100%;
+        }
+
+        .desktop-nav ul li a:hover {
+            color: var(--accent-green);
+        }
+
+        .desktop-nav ul li a.active {
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle .line {
+            width: 100%;
+            height: 3px;
+            background: var(--accent-green);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.open .line:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .menu-toggle.open .line:nth-child(2) { opacity: 0; }
+        .menu-toggle.open .line:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+        /* Mobile Navigation Overlay */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 25, 47, 0.98);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 999;
+        }
+
+        .main-nav.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        .main-nav ul li {
+            margin: 30px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .main-nav.open ul li {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .main-nav.open ul li:nth-child(1) { transition-delay: 0.1s; }
+        .main-nav.open ul li:nth-child(2) { transition-delay: 0.2s; }
+        .main-nav.open ul li:nth-child(3) { transition-delay: 0.3s; }
+        .main-nav.open ul li:nth-child(4) { transition-delay: 0.4s; }
+
+        .main-nav ul li a {
+            color: var(--accent-green);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem; /* Slightly smaller for technician profile */
+            font-weight: 700;
+            padding: 10px 20px;
+            position: relative;
+        }
+
+        .main-nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: var(--subtle-gray);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .main-nav ul li a:hover {
+            color: var(--subtle-gray);
+            transform: translateY(-5px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center content horizontally */
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px; /* Space for fixed header */
+            background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)),
+                        url('https://images.unsplash.com/photo-1576091160550-fd43c1782a7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80') center/cover no-repeat fixed; /* Relevant medical background image */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 30px;
+            text-align: center; /* Center align text */
+        }
+
+        .hero-image {
+        margin-top: 10%;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-green);
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.4);
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: fadeInScale 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInScale {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--accent-green), var(--subtle-gray));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+
+        .hero-taglines {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center align taglines */
+            gap: 15px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 1.2s;
+        }
+
+        .hero-tagline-item {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-green);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            border: 1px solid var(--accent-green);
+            transition: all 0.3s ease;
+        }
+
+        .hero-tagline-item:hover {
+            background: var(--accent-green);
+            color: var(--primary-dark-blue);
+            transform: translateY(-3px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center; /* Center align buttons */
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 1.4s;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 35px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-primary {
+            background: var(--accent-green);
+            color: var(--primary-dark-blue);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(100, 255, 218, 0.5);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--accent-green);
+            border: 2px solid var(--accent-green);
+        }
+
+        .button-secondary:hover {
+            background: var(--accent-green);
+            color: var(--primary-dark-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(100, 255, 218, 0.3);
+        }
+
+        /* Sections General Styling */
+        section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        section:nth-child(even) {
+            background: var(--secondary-blue);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 80px;
+            text-align: center;
+            position: relative;
+            color: var(--light-text);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-green);
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .about-image-wrapper {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image-wrapper::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--accent-green);
+            border-radius: 10px;
+            top: 20px;
+            left: 20px;
+            z-index: 0;
+            transition: all 0.5s ease;
+        }
+
+        .about-image-wrapper:hover::before {
+            top: 15px;
+            left: 15px;
+        }
+
+        .about-image-wrapper:hover .about-image {
+            transform: translate(-5px, -5px);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            color: var(--subtle-gray);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Skills/Qualifications Section (repurposed from skills) */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .skill-category {
+            background: rgba(23, 42, 69, 0.7); /* Slightly transparent background */
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            border-left: 4px solid var(--accent-green);
+            backdrop-filter: blur(5px);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-category h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--accent-green);
+            position: relative;
+        }
+
+        .skill-category h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--subtle-gray);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .skill-items {
+            list-style: none; /* Remove default list style */
+            padding: 0;
+            margin: 0;
+        }
+
+        .skill-item {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-green);
+            padding: 8px 15px; /* Adjust padding for better look */
+            border-radius: 5px; /* Softer edges */
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid var(--accent-green);
+            margin-bottom: 10px; /* Space between items */
+            display: block; /* Each item on a new line */
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .skill-item:hover {
+            background: var(--accent-green);
+            color: var(--primary-dark-blue);
+            transform: translateX(5px); /* Slight horizontal shift */
+        }
+
+        /* Experience Section (can be like projects or a list) */
+        .experience-item {
+            background: rgba(23, 42, 69, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--accent-green);
+            backdrop-filter: blur(5px);
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .experience-item strong {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            margin-bottom: 10px;
+        }
+
+        .experience-item p {
+            font-size: 1.1rem;
+            color: var(--subtle-gray);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content {
+            margin-top: 60px;
+        }
+
+        .contact-message {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            line-height: 1.8;
+            color: var(--subtle-gray);
+        }
+
+        .contact-options {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .contact-option {
+            background: rgba(23, 42, 69, 0.7);
+            padding: 25px 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.4s ease;
+            width: 100%;
+            max-width: 500px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .contact-option:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-green);
+        }
+
+        .contact-option a {
+            color: var(--accent-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-option:hover a {
+            color: var(--subtle-gray);
+        }
+
+        .contact-option i {
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            transition: all 0.3s ease;
+        }
+
+        .contact-option:hover i {
+            transform: scale(1.2);
+            color: var(--subtle-gray);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-blue);
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, var(--accent-green), var(--subtle-gray));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-green);
+            transform: translateY(-5px) scale(1.2);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(204, 214, 246, 0.6);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-green);
+            color: var(--primary-dark-blue);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(100, 255, 218, 0.3);
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--subtle-gray);
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Reveal Animation for sections */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .section-title { font-size: 3rem; margin-bottom: 60px; }
+            .hero-content h1 { font-size: 3.5rem; }
+            .hero-content p { font-size: 1.3rem; }
+            .desktop-nav { display: none; }
+            .menu-toggle { display: flex; }
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2.5rem; margin-bottom: 50px; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .hero-content p { font-size: 1.1rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .button { width: 100%; max-width: 250px; }
+            .about-content { flex-direction: column; }
+            .about-image-wrapper { margin-bottom: 40px; }
+            .skills-container { grid-template-columns: 1fr; }
+            .main-nav ul li a { font-size: 2.2rem; }
+            .contact-option { flex-direction: column; text-align: center; padding: 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .section-title { font-size: 2rem; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-tagline-item { font-size: 0.9rem; padding: 8px 15px; }
+            .footer-links { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <a href="#home" class="logo">Shubham Verma</a>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#about" class="active">About</a></li>
+                    <li><a href="#qualifications">Qualifications</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-nav" id="mobile-nav-overlay">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#qualifications">Qualifications</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <img src="https://ik.imagekit.io/cjyde4bkg/IMG-20250709-WA0002.jpg?updatedAt=1752834590601" alt="Shubham Verma" class="hero-image">
+            <h1>SHUBHAM VERMA</h1>
+            <p><strong>Dedicated & Experienced Phlebotomy Technician</strong></p>
+            <div class="hero-taglines">
+                <span class="hero-tagline-item">Certified Phlebotomist</span>
+                <span class="hero-tagline-item">4+ Years Experience</span>
+                <span class="hero-tagline-item">Patient Care Focused</span>
+                <span class="hero-tagline-item">Excellent Communication</span>
+            </div>
+            <div class="hero-buttons">
+                <a href="#experience" class="button button-primary">View My Experience</a>
+                <a href="#contact" class="button button-secondary">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <div class="container">
+            <h2 class="section-title">About Me & Objective</h2>
+            <div class="about-content">
+                <div class="about-image-wrapper">
+                    <img src="https://ik.imagekit.io/cjyde4bkg/IMG-20250709-WA0003.jpg?updatedAt=1752834590515" alt="Shubham Verma" class="about-image">
+                </div>
+                <div class="about-text">
+                    <p>Hello! I'm Shubham Verma, a highly dedicated and experienced Phlebotomy Technician with *over 4 years of hands-on experience* in reputable diagnostic laboratories. My career objective is to work in a creative environment that will allow me to *utilize my skills and increase my knowledge* so that I could effectively and efficiently *contribute towards the goals of the organization*.</p>
+                    <p>I possess a strong foundation in all phlebotomy procedures, including both *vacutainer and syringe techniques, ensuring precise and comfortable sample collection. My professional journey has honed my **communication skills* and fostered a *creative and hard-working approach* to patient care and laboratory operations.</p>
+                    <p>I am passionate about contributing to healthcare by ensuring accurate and efficient laboratory processes, always prioritizing patient comfort and safety.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="qualifications" class="reveal">
+        <div class="container">
+            <h2 class="section-title">My Qualifications</h2>
+            <div class="skills-container">
+                <div class="skill-category reveal">
+                    <h3>Academic & Professional Certifications</h3>
+                    <ul class="skill-items">
+                        <li class="skill-item"><i class="fas fa-graduation-cap"></i> High School from U.P. Board in *2019*.</li>
+                        <li class="skill-item"><i class="fas fa-graduation-cap"></i> Intermediate from U.P Board Allahabad in *2021*.</li>
+                        <li class="skill-item"><i class="fas fa-graduation-cap"></i> Graduation *B.Sc* from (RMLAU) in *2024*.</li>
+                        <li class="skill-item"><i class="fas fa-certificate"></i> *Phlebotomy Technician* from (L.P.L) Academy Lucknow.</li>
+                    </ul>
+                </div>
+                <div class="skill-category reveal">
+                    <h3>Computer Proficiency</h3>
+                    <ul class="skill-items">
+                        <li class="skill-item"><i class="fas fa-desktop"></i> *DCA* (Diploma in Computer Applications).</li>
+                        <li class="skill-item"><i class="fas fa-keyboard"></i> *CCC* From (NIELIT).</li>
+                        <li class="skill-item"><i class="fas fa-code"></i> *O-Level* From (NIELIT).</li>
+                    </ul>
+                </div>
+                <div class="skill-category reveal">
+                    <h3>Key Skills & Attributes</h3>
+                    <ul class="skill-items">
+                        <li class="skill-item"><i class="fas fa-comments"></i> Good Communication Skills.</li>
+                        <li class="skill-item"><i class="fas fa-lightbulb"></i> Creative and Innovative Approach.</li>
+                        <li class="skill-item"><i class="fas fa-bolt"></i> Hard Working and Dedicated.</li>
+                        <li class="skill-item"><i class="fas fa-hand-holding-medical"></i> Proficient in Patient Handling.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="reveal">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="experience-item reveal">
+                <strong>4 Years Working Experience (2021 - Present)</strong>
+                <p>Gained invaluable experience as a Phlebotomy Technician at leading diagnostic centers:</p>
+                <ul>
+                    <li>Successfully completed 4 years of service at *Dr Lal Path Lab*, Lucknow.</li>
+                    <li>Contributed significantly at *Apollo Diagnostic*, Lucknow.</li>
+                </ul>
+            </div>
+            <div class="experience-item reveal">
+                <strong>Current Role: Phlebotomy Technician</strong>
+                <p>Currently serving as a Phlebotomy Technician at *Max Lab*, Barabanki, actively contributing to patient care and laboratory operations.</p>
+            </div>
+            <div class="experience-item reveal">
+                <strong>Laboratory Expertise: Phlebotomy Procedures</strong>
+                <p>Utilize extensive experience in all phlebotomy procedures, including precise blood collection using both *vacutainer* and *syringe* methods, ensuring minimal discomfort and high accuracy for diagnostic testing.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal">
+        <div class="container contact-container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="contact-message">I'm always open to new opportunities and collaborations. Feel free to reach out to discuss how my skills and experience can benefit your organization.</p>
+            <div class="contact-options">
+                <div class="contact-option reveal">
+                    <i class="fas fa-phone-alt"></i>
+                    <a href="tel:+919616934523">+91 9616934523</a>
+                </div>
+                <div class="contact-option reveal">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Paisar Plaza, Barabanki 225001</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <a href="#home" class="footer-logo">Shubham Verma</a>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#qualifications">Qualifications</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            <p class="copyright">&copy; 2024 Shubham Verma. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="scroll-top" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Smooth Scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    const mobileNav = document.getElementById('mobile-nav-overlay');
+                    const menuToggle = document.getElementById('mobile-menu');
+                    if (mobileNav.classList.contains('open')) {
+                        mobileNav.classList.remove('open');
+                        menuToggle.classList.remove('open');
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+        });
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            mobileNavOverlay.classList.toggle('open');
+            if (mobileNavOverlay.classList.contains('open')) {
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Reveal sections on scroll
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+
+            reveals.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 150; // Pixels from bottom to trigger reveal
+
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active'); // Optional: hide when scrolled away
+                }
+            });
+        }
+
+        // Initial check and add event listener
+        document.addEventListener('DOMContentLoaded', revealElements);
+        window.addEventListener('scroll', revealElements);
+
+        // Scroll to top button functionality
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling 300px
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
